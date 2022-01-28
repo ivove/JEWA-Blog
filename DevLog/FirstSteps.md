@@ -16,7 +16,7 @@ That nicely created a local repo to work in. Now just adding a "src" folder for 
 
 ## Visual Studio
 
-Visual Studio 2022 community edition is the version installed on my developer machine, so that what will be used. This version allows the use of .NET 6 which will be the .NET version used for the blogging engine. In the wizard choosing create new project and in the next screen choosing to create an ASP.NET core Web App. In the next screen naming the project and choosing the location, making sure the location corresponds to the src folder created in the local GitHub repo. And lastly choosing the framework to be .NET 6.0, setting the project to not use authentication (will be added later). Also leaving the checkbox to configure HTTPS on. Clicking the create button to create the new project.
+Visual Studio 2022 community edition is the version installed on my developer machine, so that what will be used. This version allows the use of .NET 6 which will be the .NET version used for the blogging engine. In the wizard choosing create new project and in the next screen choosing to create an ASP.NET core Web App (Model-View-Controller). In the next screen naming the project and choosing the location, making sure the location corresponds to the src folder created in the local GitHub repo. And lastly choosing the framework to be .NET 6.0, setting the project to not use authentication (will be added later). Also leaving the checkbox to configure HTTPS on. Clicking the create button to create the new project.
 
 ## Optional: Github Actions
 

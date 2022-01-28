@@ -22,4 +22,36 @@ Visual Studio 2022 community edition is the version installed on my developer ma
 
 Disclaimer: I have no actual knowledge of GitHub actions, So this is just playing around.
 
-In the GitHub Web interface I added a build action, using the predefined workflow for ".NET" and modifying the workflow to use the latest windows version and using .NET version 6.0
+In the GitHub Web interface I added a build action, using the predefined workflow for ".NET" and modifying the workflow to use the latest windows version and using .NET version 6.0. This should result in a build being triggered an each push to the main branch.
+
+As this was playing around, I forgot to specify the working directory in the workflow yml file. This is needed as the visual studio solution exists in the src subfolder of the repo and not at the top level. So this should be specified. As reference, this is the content od the dotnet.yml file containing the workflow:
+
+```
+name: .NET
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+      working-directory: src
+    - name: Build
+      run: dotnet build --no-restore
+      working-directory: src
+```
+
+So now we are all set to start coding!! We'll start coding in the next post.

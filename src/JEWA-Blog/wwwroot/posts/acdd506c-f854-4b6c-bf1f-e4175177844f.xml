@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<post>
+	<postId>
+		acdd506c-f854-4b6c-bf1f-e4175177844f
+	</postId>
+	<title>Writing a blogging engine - First steps</title>
+	<excerpt>
+		Recently I started thinking about starting a blog. This thought came to me after listening to tech podcasts, and reading tech blogs, 
+		all suggesting blogging as a good way to advance your career, or continue learning. So why not start a blog on some topics I'm interested in, 
+		it won't hurt me, and who knows, I might be some help to someone out there reading this.
+	</excerpt>
+	<category>coding</category>
+	<isPublished>true</isPublished>
+	<publicationDate>2022-02-01 20:25:00</publicationDate>
+	<comments>
+		<commentId>c86f27be-c999-4380-ae77-df53aa886700</commentId>
+		<publicationDate>2022-02-01 21:25:00</publicationDate>
+		<author>Ivo</author>
+		<email>ivo@test.com</email>
+		<content>Congrats on your first post</content>
+		<replyTo></replyTo>
+		<replies></replies>
+	</comments>
+</post>

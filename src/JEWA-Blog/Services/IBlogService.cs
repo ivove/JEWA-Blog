@@ -7,11 +7,13 @@ namespace JEWA_Blog.Services
         Task SavePost(Post post);
         Task DeletePost(Post post);
 
-        Task<List<string>> GetCategories();
+        IAsyncEnumerable<string> GetCategories();
 
-        Task<Post> GetPostById(string id);
-        Task<Post> GetPostByTitle(string title);
+        Task<Post?> GetPostById(string id);
+        Task<Post?> GetPostByTitle(string title);
 
-        Task<List<Post>> GetPosts(int count,int skip=0,string category="");
+        IAsyncEnumerable<Post> GetPosts(int count,int skip=0,string category="",bool published=true);
+
+        Task<int> GetPostCount(bool published  = true);
     }
 }

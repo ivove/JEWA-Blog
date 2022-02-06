@@ -71,6 +71,67 @@ foreach (var file in Directory.EnumerateFiles(xmlFolder, "*.xml",       SearchOp
     };
     var markdownFile = Path.Combine(markdownFolder, post.PostId,".md");
     post.Content = File.ReadAllText(markdownFile);
+    LoadComments(post,doc);
     posts.Add(post);
 }
 ```
+
+Next the LoadComments method should be implemented. This will consist of reading the comments node in the XML-document and creating a Comments-object for each comment, then adding the comments to the Comments property of the post. As any comment could have a reply, this too should be accounted for.
+The code for this might look something like this:
+
+```
+private static void LoadComments(Post post,XElement doc)
+{
+    var comments = doc.Element("comments");
+
+    if (comments is null)
+    {
+        return;
+    }
+
+    foreach (var node in comments.Elements("comment"))
+    {
+        var comment = new Comment
+        {
+            CommentId = ReadXmlValue(node, "id"),
+            Author = ReadXmlValue(node, "author"),
+            Email = ReadXmlValue(node, "email"),
+            Content = ReadXmlValue(node, "content"),
+            PublicationTime = DateTime.Parse(ReadXmlValue(node, "publicationDate", "2000-01-01 00:00:00"),
+                CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal),
+        };
+        LoadReplies(comment,node);
+        post.Comments.Add(comment);
+    }
+}
+
+private static void LoadReplies(Comment comment,XElement doc)
+{
+    var replies = doc.Element("replies");
+
+    if (replies is null)
+    {
+        return;
+    }
+
+    foreach (var node in replies.Elements("comment"))
+    {
+        var reply = new Comment
+        {
+            CommentId = ReadXmlValue(node, "id"),
+            Author = ReadXmlValue(node, "author"),
+            Email = ReadXmlValue(node, "email"),
+            Content = ReadXmlValue(node, "content"),
+            ReplyTo = ReadXmlValue(node, "replyTo"),
+            PublicationTime = DateTime.Parse(ReadXmlValue(node, "publicationDate", "2000-01-01 00:00:00"),
+                CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal),
+        };
+        LoadReplies(reply, node);
+        comment.Replies.Add(reply);
+    }
+}
+```
+
+After all this, the post should be loaded in the posts-field of the class. The next step would be implementing the methods getting the data. These are very straightforward, so they won't be discussed here. The methods to add, edit or delete a post will be built later.
+
+Next up, building the interface to see the posts...

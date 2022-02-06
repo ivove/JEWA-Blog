@@ -94,13 +94,15 @@ Finishing with the comments, this would be an element containing zero or more co
     <isPublished>true</isPublished>
     <publicationDate>2022-02-01 20:25:00</publicationDate>
     <comments>
-        <commentId>c86f27be-c999-4380-ae77-df53aa886700</commentId>
-        <publicationDate>2022-02-01 21:25:00</publicationDate>
-        <author>Ivo</author>
-        <email>ivo@test.com</email>
-        <content>Congrats on your first post</content>
-        <replyTo></replyTo>
-        <replies></replies>
+        <comment>
+            <commentId>c86f27be-c999-4380-ae77-df53aa886700</commentId>
+            <publicationDate>2022-02-01 21:25:00</publicationDate>
+            <author>Ivo</author>
+            <email>ivo@test.com</email>
+            <content>Congrats on your first post</content>
+            <replyTo></replyTo>
+            <replies></replies>
+        </comment>
     </comments>
 </post>
 ```

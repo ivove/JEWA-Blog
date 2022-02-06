@@ -4,16 +4,16 @@ namespace JEWA_Blog.Services
 {
     public interface IBlogService
     {
-        Task SavePost(Post post);
-        Task DeletePost(Post post);
+        void SavePost(Post post);
+        void DeletePost(Post post);
 
-        IAsyncEnumerable<string> GetCategories();
+        IEnumerable<string> GetCategories();
 
-        Task<Post?> GetPostById(string id);
-        Task<Post?> GetPostByTitle(string title);
+        Post? GetPostById(string id);
+        Post? GetPostByTitle(string title);
 
-        IAsyncEnumerable<Post> GetPosts(int count,int skip=0,string category="",bool published=true);
+        IEnumerable<Post> GetPosts(int count,int skip=0,string category="",bool published=true);
 
-        Task<int> GetPostCount(bool published  = true);
+        int GetPostCount(bool published  = true);
     }
 }

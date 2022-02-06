@@ -13,12 +13,23 @@
 	<isPublished>true</isPublished>
 	<publicationDate>2022-02-01 20:25:00</publicationDate>
 	<comments>
-		<commentId>c86f27be-c999-4380-ae77-df53aa886700</commentId>
-		<publicationDate>2022-02-01 21:25:00</publicationDate>
-		<author>Ivo</author>
-		<email>ivo@test.com</email>
-		<content>Congrats on your first post</content>
-		<replyTo></replyTo>
-		<replies></replies>
+		<comment>
+			<commentId>c86f27be-c999-4380-ae77-df53aa886700</commentId>
+			<publicationDate>2022-02-01 21:25:00</publicationDate>
+			<author>Ivo</author>
+			<email>ivo@test.com</email>
+			<content>Congrats on your first post</content>
+			<replyTo></replyTo>
+			<replies>
+				<comment>
+					<commentId>d346855a-f838-4afc-9803-584074fa8d04</commentId>
+					<publicationDate>2022-02-01 21:49:00</publicationDate>
+					<author>Ivo Ver Eecke</author>
+					<email>ivo.ver.eecke@gmail.com</email>
+					<content>Thanks a lot!</content>
+					<replyTo>c86f27be-c999-4380-ae77-df53aa886700</replyTo>
+				</comment>
+			</replies>
+		</comment>
 	</comments>
 </post>

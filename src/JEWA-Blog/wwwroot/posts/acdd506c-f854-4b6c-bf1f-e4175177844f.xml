@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <post>
-	<postId>
-		acdd506c-f854-4b6c-bf1f-e4175177844f
-	</postId>
+	<postId>acdd506c-f854-4b6c-bf1f-e4175177844f</postId>
 	<title>Writing a blogging engine - First steps</title>
 	<excerpt>
 		Recently I started thinking about starting a blog. This thought came to me after listening to tech podcasts, and reading tech blogs, 

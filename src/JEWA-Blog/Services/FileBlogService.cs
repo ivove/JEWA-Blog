@@ -40,7 +40,7 @@ namespace JEWA_Blog.Services
 
         public IEnumerable<string> GetCategories()
         {
-            return _posts.Where(p => p.IsPublished && p.PublicationDate >= DateTime.Now)
+            return _posts.Where(p => p.IsPublished && p.PublicationDate <= DateTime.Now)
                 .Select(post => post.Category.ToLowerInvariant())
                 .Distinct();
         }
@@ -62,7 +62,7 @@ namespace JEWA_Blog.Services
 
         public IEnumerable<Post> GetPosts(int count, int skip = 0, string category = "", bool published = true)
         {
-            var posts = _posts.Where(p=> (category == "" || category == p.Category) && (!published ||(p.IsPublished && (p.PublicationDate >= DateTime.Now))))
+            var posts = _posts.Where(p => ((category == "") || (category == p.Category)) && (!published || (p.IsPublished && (p.PublicationDate <= DateTime.Now))))
                 .Skip(skip).Take(count);
             return posts;
         }
@@ -108,7 +108,7 @@ namespace JEWA_Blog.Services
                         DateTimeStyles.AdjustToUniversal),
                     IsPublished = bool.Parse(ReadXmlValue(doc, "isPublished", "true")),
                 };
-                var markdownFile = Path.Combine(_markdownFolder, post.PostId,".md");
+                var markdownFile = Path.Combine(_markdownFolder, post.PostId+".md");
                 post.Content = File.ReadAllText(markdownFile);
                 LoadComments(post,doc);
                 _posts.Add(post);

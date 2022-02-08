@@ -16,3 +16,12 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.category-list{
+    list-style:none;
+}
+
+.post-link {
+    text-decoration:none;
+    color:inherit;
+}

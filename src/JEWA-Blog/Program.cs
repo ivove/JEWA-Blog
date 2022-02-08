@@ -1,7 +1,11 @@
+using JEWA_Blog.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton<IBlogService, FileBlogService>();
 
 var app = builder.Build();
 

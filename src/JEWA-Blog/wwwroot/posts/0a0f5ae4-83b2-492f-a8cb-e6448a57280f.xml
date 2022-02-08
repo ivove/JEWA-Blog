@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <post>
-	<postId>
-		0a0f5ae4-83b2-492f-a8cb-e6448a57280f
-	</postId>
+	<postId>0a0f5ae4-83b2-492f-a8cb-e6448a57280f</postId>
 	<title>Writing a blogging engine - Data Access</title>
 	<excerpt>
 		When thinking about accessing data, what is really important is to define some sort of "contract" to get to the data. 

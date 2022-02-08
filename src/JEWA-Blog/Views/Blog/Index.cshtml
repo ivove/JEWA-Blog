@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Post>
+
+<div class="row d-md-none">
+    <div class="col-12">
+        <h3>Categories</h3>
+        @foreach (var cat in ViewBag.Categories)
+        {
+            <a asp-action="index" asp-route-page="0" asp-route-category="@cat">@cat</a>
+
+            <text> | </text>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10 col-sm-12">
+        @if (Model != null)
+        {
+            foreach (var post in Model)
+            {
+                <div>
+                    <h2>
+                        <a asp-action="post" asp-route-id="@post.PostId" class="post-link">@post.Title </a>
+                        <small class="text-muted">@post.PublicationDate?.ToString("dd/MM/yyyy")</small>
+                    </h2>
+                    <span>@post.Excerpt</span>
+                </div>
+            }
+        }
+    </div>
+    <div class="col-md-2 d-none d-md-block">
+        <h3>Categories</h3>
+        <ul class="category-list">
+            @foreach (var cat in ViewBag.Categories)
+            {
+                <li> <a asp-action="index" asp-route-page="0" asp-route-category="@cat">@cat</a> </li>
+            }
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        @if(ViewBag.ShowNext){
+        <a asp-action="index">Older</a>
+        }
+        @if (ViewBag.ShowPrevious)
+        {
+            <a asp-action="index">Newer</a>
+        }
+    </div>
+</div>

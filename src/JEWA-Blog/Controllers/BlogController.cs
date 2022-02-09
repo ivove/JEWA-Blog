@@ -16,11 +16,39 @@ namespace JEWA_Blog.Controllers
         public IActionResult Index([FromRoute] int page = 0,[FromRoute]string category="")
         {
             var posts = _blog.GetPosts(PAGESIZE, page*PAGESIZE,category);
-            if (page > 0) { ViewBag.ShowPrevious = true; } else { ViewBag.ShowPrevious = false; }
+
             var postCount = _blog.GetPostCount();
-            if ((page*PAGESIZE)<postCount) { ViewBag.ShowNext = true; } else { ViewBag.ShowNext = false; }
+            if (page > 0) 
+            { 
+                ViewBag.ShowNewer = true;
+                ViewBag.NewerPage = page-1;
+            } else { ViewBag.ShowNewer = false; }
+            if (((page*PAGESIZE)+posts.Count())<postCount) 
+            { 
+                ViewBag.ShowOlder = true; 
+                ViewBag.OlderPage = page+1;
+            } else { ViewBag.ShowOlder = false; }
+
             ViewBag.Categories = _blog.GetCategories();
+            ViewBag.CurrentCategory = category;
+
             return View(posts);
+        }
+
+        public IActionResult Post(string id)
+        {
+            var post = _blog.GetPostById(id);
+            if (post == null) { return NotFound(); }
+            return View(post);
+        }
+
+        [Route("/blog/post/title/{title}")]
+        public IActionResult PostPermanent([FromRoute]string title)
+        {
+            if (title == null) { return NotFound(); }
+            var post = _blog.GetPostByTitle(title);
+            if (post == null) { return NotFound(); }
+            return View("Post",post);
         }
     }
 }

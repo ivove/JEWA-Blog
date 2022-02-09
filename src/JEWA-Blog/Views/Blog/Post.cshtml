@@ -1,0 +1,26 @@
+﻿@model Post
+@{
+}
+<section id="Post">
+    <div class="row">
+        <div class="col-12">
+            <h1>
+                @Model.Title
+                <small class="text-muted">@Model.PublicationDate?.ToString("dd/MM/yyyy")</small>
+            </h1>
+            <div>
+                <markdown>@Model.Content)</markdown>
+            </div>
+        </div>
+    </div>
+</section>
+@if (Model.Comments != null)
+{
+    if (Model.Comments.Count > 0)
+    {
+        <section id="Comments">
+            <h2>Comments</h2>
+
+        </section>
+    }
+}

@@ -14,7 +14,8 @@ Using the layout provided by the template allows for a relatively easy start, as
 
 ## The controller
 
-For the blog to actually display something, a controller is needed. In this case the BlogController will be created under the "Controllers" folder. In the most basic case, for the blog, this controller will have 2 methods, the Index method and the Post method. The default routing mechanism will the route all requests for /blog to the index method, while all requests for /post will be handled by the post method. additional parameters can be passed is. For the post method, an id parameter (holding the id of the post to show) will be passed in. For the index method, an optional parameter holding the page number will be needed. The default routing will make sure the id parameter on the post method gets mapped correctly when using /post/_postid_. For the page number, a custom route will be defined, using an attribute on the method like:
+For the blog to actually display something, a controller is needed. In this case the BlogController will be created under the "Controllers" folder. In the most basic case, for the blog, this controller will have 2 methods, the Index method and the Post method. The default routing mechanism will the route all requests for /blog to the index method, while all requests for /post will be handled by the post method. additional parameters can be passed is. For the post method, an id parameter (holding the id of the post to show) will be passed in. For the index method, an optional parameter holding the page number will be needed. The default routing will make sure the id parameter on the post method gets mapped correctly when using /post/_postid_.
+For the page number, a custom route will be defined, using an attribute on the method like:
 
 ```
     [Route("/blog/{page:int?}")]
@@ -29,4 +30,33 @@ Note that in this case the concrete implementation for the IBlogService is the F
 
 ```
 builder.Services.AddSingleton<IBlogService, FileBlogService>();
+```
+
+## Noticing things and changing accordingly
+
+While working on the UI, it is not at all exceptional to notice some things are missing, or are implemented a bit strange. This section will detail some of these quirks and the solution implemented.
+
+### Markdown
+
+In order to display the markdown content correctly, a markdown interpreter is needed. Fortunately there is no need to write this, as there are options available. For this project Westwind.AspNetCore.Markdown was selected, this was installed through NuGet. After installation a change to the \_ViewImports.cshtml file is needed in order to use the available taghelper. Two lines need to be added:
+
+```
+@using Westwind.AspNetCore.Markdown
+
+@addTagHelper *, Westwind.AspNetCore.Markdown
+```
+
+After that, in the view it is possible to wrap the markdown content in markdown-tags. This will make sure the markdown code is displayed properly.
+
+```
+<markdown>@Model.Content)</markdown>
+```
+
+### counting the posts
+
+As the list of posts can be filtered by category, the need quickly arises to count the posts per category. This was not implemented in the IBlogService, and subsequently not implemented in the FileBlogService.
+Adjusting for this means a change in the IBlogService and in the FileBlogService. after changing the IBlogService, the definition for the GetPostCount looks like:
+
+```
+int GetPostCount(string category ="",bool published  = true);
 ```

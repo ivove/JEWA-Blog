@@ -14,6 +14,6 @@ namespace JEWA_Blog.Services
 
         IEnumerable<Post> GetPosts(int count,int skip=0,string category="",bool published=true);
 
-        int GetPostCount(bool published  = true);
+        int GetPostCount(string category ="",bool published  = true);
     }
 }

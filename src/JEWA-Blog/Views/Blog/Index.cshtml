@@ -39,12 +39,12 @@
 </div>
 <div class="row">
     <div class="col-12">
-        @if(ViewBag.ShowNext){
-        <a asp-action="index">Older</a>
+        @if(ViewBag.ShowOlder){
+        <a asp-action="index" asp-route-page="@ViewBag.OlderPage" asp-route-category="@ViewBag.CurrentCategory">Older</a>
         }
-        @if (ViewBag.ShowPrevious)
+        @if (ViewBag.ShowNewer)
         {
-            <a asp-action="index">Newer</a>
+            <a asp-action="index" asp-route-page="@ViewBag.NewerPage" asp-route-category="@ViewBag.CurrentCategory">Newer</a>
         }
     </div>
 </div>

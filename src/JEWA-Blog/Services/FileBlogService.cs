@@ -55,9 +55,10 @@ namespace JEWA_Blog.Services
             return _posts.FirstOrDefault(p => p.Title.Equals(title,StringComparison.OrdinalIgnoreCase));
         }
 
-        public int GetPostCount(bool published = true)
+        public int GetPostCount(string category="",bool published = true)
         {
-            return _posts.Count;
+            if (category == "") { return _posts.Where(p=> (!published || (p.IsPublished && (p.PublicationDate <= DateTime.Now)))).Count(); }
+            return _posts.Where(p =>(p.Category==category) && (!published || (p.IsPublished && (p.PublicationDate <= DateTime.Now)))).Count();
         }
 
         public IEnumerable<Post> GetPosts(int count, int skip = 0, string category = "", bool published = true)

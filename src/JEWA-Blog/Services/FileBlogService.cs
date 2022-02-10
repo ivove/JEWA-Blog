@@ -138,7 +138,7 @@ namespace JEWA_Blog.Services
             {
                 var comment = new Comment
                 {
-                    CommentId = ReadXmlValue(node, "id"),
+                    CommentId = ReadXmlValue(node, "commentId"),
                     Author = ReadXmlValue(node, "author"),
                     Email = ReadXmlValue(node, "email"),
                     Content = ReadXmlValue(node, "content"),

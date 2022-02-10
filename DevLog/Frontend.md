@@ -32,6 +32,10 @@ Note that in this case the concrete implementation for the IBlogService is the F
 builder.Services.AddSingleton<IBlogService, FileBlogService>();
 ```
 
+## Comments
+
+One aspect of the post page is the possibility to leave a comment, or to reply to a comment. This can be done using some simple javascript and a bootstrap model containing a form. The form submit would then trigger the save of the comment or reply and refresh the page. The only distinction between a comment and a reply would be that the reply contains a reference to the already existing comment. In the modal it might be nice, when replying to show the original comment.
+
 ## Noticing things and changing accordingly
 
 While working on the UI, it is not at all exceptional to notice some things are missing, or are implemented a bit strange. This section will detail some of these quirks and the solution implemented.

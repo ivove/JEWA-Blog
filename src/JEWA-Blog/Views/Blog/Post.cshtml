@@ -16,8 +16,8 @@
 </section>
 <section id="Comments">
     <h2>Comments</h2>
-    <button class="btn btn-dark newComment"  data-postId="@Model.PostId">New comment</button>
-    <hr/>
+    <button class="btn btn-dark newComment" data-postId="@Model.PostId">New comment</button>
+    <hr />
     @if (Model.Comments != null)
     {
         if (Model.Comments.Count > 0)
@@ -60,9 +60,9 @@
                         <button class="btn btn-dark reply" data-commentId="@comment.CommentId" data-postId="@Model.PostId">Reply</button>
                     </div>
                 </div>
-                <hr/>
+                <hr />
             }
-            <button class="btn btn-dark newComment" data-postId="@Model.PostId">New comment</button>
+            <button class="btn btn-dark newCommentBottom" data-postId="@Model.PostId">New comment</button>
         }
     }
 </section>
@@ -74,15 +74,48 @@
                 <h5 class="modal-title">New Comment / reply</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form>
+
+            <form class="needs-validation" asp-action="NewComment" method="post">
                 <div class="modal-body">
-                    <input type="text" id="postId" />
-                    <input type="text" id="commentId" />
-                    <p>Modal body text goes here.</p>
+                    <input type="hidden" id="postId" name="postId"/>
+                    <input type="hidden" id="commentId" name="commentId" />
+                    <div class="row ">
+                        <div class="col-12">
+                            <span class="replyTo"></span>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <label for="author" class="col-sm-2 col-form-label">Author</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="author" name="author" required>
+                            <div class="invalid-feedback">
+                                Please provide an author, your name.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="email" class="col-sm-2 col-form-label">E-mail</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="email" name="email">
+                            <div class="invalid-feedback">
+                                Please enter a valid e-mail.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="comment" class="col-sm-2 col-form-label">Comment</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control " id="comment" name="comment" required></textarea>
+                            <div class="invalid-feedback">
+                                Please enter a comment.
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <input type="submit" class="btn btn-primary" value="Submit"/>
                 </div>
             </form>
         </div>
@@ -91,25 +124,28 @@
 
 @section Scripts
 {
-    <script>
-        var modal = new bootstrap.Modal(document.getElementById('commentModal'));
-        document.querySelector('.newComment').addEventListener("click", function() {launchModalComment()});
-        document.querySelector('.reply').addEventListener("click", function() {launchModalComment()});
+<script>
+    var modal = new bootstrap.Modal(document.getElementById('commentModal'));
+    document.querySelector('.newComment').addEventListener("click", function() {launchModalComment()});
+    if (document.querySelector('.reply')){
+        document.querySelector('.reply').addEventListener("click", function() {launchModalReply()});
+        document.querySelector('.newCommentBottom').addEventListener("click", function() {launchModalComment()});
+    }
 
-        var launchModalComment = function() {
-            document.getElementById("postId").value = document.querySelector('.newComment').dataset.postid;
-            launchModal();
-        };
-        var launchModalReply= function() {
-            document.getElementById("postId").value = document.querySelector('.reply').dataset.postid;
-            document.getElementById("commentId").value = document.querySelector('.reply').dataset.commentid;
-            
-            launchModal();
-        };
+    var launchModalComment = function() {
+        document.querySelector('.reply').innerHTML = "";
+        document.getElementById("postId").value = document.querySelector('.newComment').dataset.postid;
+        launchModal();
+    };
+    var launchModalReply= function() {
+        document.getElementById("postId").value = document.querySelector('.reply').dataset.postid;
+        document.getElementById("commentId").value = document.querySelector('.reply').dataset.commentid;
+        document.querySelector('.replyTo').innerHTML = document.getElementById(document.querySelector('.reply').dataset.commentid).innerHTML;
+        launchModal();
+    };
 
-        var launchModal = function() {
-            console.log("test");
-            modal.show();
-        };
-    </script>
+    var launchModal = function() {
+        modal.show();
+    };
+</script>
 }

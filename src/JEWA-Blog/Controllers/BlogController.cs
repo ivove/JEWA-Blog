@@ -1,4 +1,5 @@
-﻿using JEWA_Blog.Services;
+﻿using JEWA_Blog.Models;
+using JEWA_Blog.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JEWA_Blog.Controllers
@@ -49,6 +50,38 @@ namespace JEWA_Blog.Controllers
             var post = _blog.GetPostByTitle(title);
             if (post == null) { return NotFound(); }
             return View("Post",post);
+        }
+
+        [HttpPost]
+        public IActionResult NewComment(string postId,string commentId,string author,string email,string comment)
+        {
+            var post = _blog.GetPostById(postId);
+            if (post == null) { return NotFound(); }
+            var newComment = new Comment
+            {
+                PostId = postId,
+                Author = author,
+                Email = email,
+                Content = comment
+            };
+            if (string.IsNullOrEmpty(commentId))
+            {
+                post.Comments.Add(newComment);
+                _blog.SavePost(post);
+            } 
+            else
+            {
+                newComment.ReplyTo = commentId;
+                var replyTo = post.Comments.FirstOrDefault(c => c.CommentId == commentId);
+                if (replyTo != null)
+                {
+                    post.Comments.Remove(replyTo);
+                    replyTo.Replies.Add(newComment);
+                    post.Comments.Add(replyTo);
+                    _blog.SavePost(post);
+                }
+            }
+            return RedirectToAction("Post", new { id = postId });
         }
     }
 }

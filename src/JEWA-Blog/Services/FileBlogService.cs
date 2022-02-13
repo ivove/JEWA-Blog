@@ -67,10 +67,74 @@ namespace JEWA_Blog.Services
                 .Skip(skip).Take(count);
             return posts;
         }
-
+        private string GetXmlFilePath(Post post) => Path.Combine(_xmlFolder, $"{post.PostId}.xml");
+        private string GetMarkdownFilePath(Post post) => Path.Combine(_markdownFolder, $"{post.PostId}.md");
+        private static string FormatDateTime(DateTime? dateTime)
+        {
+            const string UTC = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'";
+            if (dateTime==null) { return string.Empty; }
+            return dateTime.Value.Kind == DateTimeKind.Utc
+                ? dateTime.Value.ToString(UTC, CultureInfo.InvariantCulture)
+                : dateTime.Value.ToUniversalTime().ToString(UTC, CultureInfo.InvariantCulture);
+        }
         public void SavePost(Post post)
         {
-            throw new NotImplementedException();
+            if (post is null)
+            {
+                throw new ArgumentNullException(nameof(post));
+            }
+
+            var xmlFilePath = GetXmlFilePath(post);
+            var markdownFilePath = GetMarkdownFilePath(post);
+
+            var doc = new XDocument(
+                            new XElement("post",
+                                new XElement("title", post.Title),
+                                new XElement("publicationDate", FormatDateTime(post.PublicationDate)),
+                                new XElement("excerpt", post.Excerpt),
+                                new XElement("ispublished", post.IsPublished),
+                                new XElement("category", post.Category),
+                                new XElement("comments", string.Empty)
+                            ));
+            var comments = doc.XPathSelectElement("post/comments");
+            foreach (var comment in post.Comments)
+            {
+                comments.Add(
+                    new XElement("comment",
+                        new XElement("author", comment.Author),
+                        new XElement("email", comment.Email),
+                        new XElement("date", FormatDateTime(comment.PublicationTime)),
+                        new XElement("content", comment.Content),
+                        new XElement("id", comment.CommentId),
+                        new XElement("replies", string.Empty)
+                    ));
+                var replies = comments.XPathSelectElement("comment/replies");
+                foreach (var reply in comment.Replies)
+                {
+                    replies.Add(
+                        new XElement("comment",
+                        new XElement("author", reply.Author),
+                        new XElement("email", reply.Email),
+                        new XElement("date", FormatDateTime(reply.PublicationTime)),
+                        new XElement("content", reply.Content),
+                        new XElement("id", reply.CommentId),
+                        new XElement("replies", string.Empty)
+                    ));
+                }
+            }
+
+            using (var fs = new FileStream(xmlFilePath, FileMode.Create, FileAccess.ReadWrite))
+            {
+                doc.Save(fs, SaveOptions.None);
+            }
+
+            File.WriteAllText(markdownFilePath,post.Content);
+
+            if (!_posts.Contains(post))
+            {
+                _posts.Add(post);
+                SortPosts();
+            }
         }
 
         private void Initialize()

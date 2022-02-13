@@ -75,9 +75,7 @@ namespace JEWA_Blog.Controllers
                 var replyTo = post.Comments.FirstOrDefault(c => c.CommentId == commentId);
                 if (replyTo != null)
                 {
-                    post.Comments.Remove(replyTo);
                     replyTo.Replies.Add(newComment);
-                    post.Comments.Add(replyTo);
                     _blog.SavePost(post);
                 }
             }

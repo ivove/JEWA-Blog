@@ -1,16 +1,40 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <post>
-	<postId>0a0f5ae4-83b2-492f-a8cb-e6448a57280f</postId>
-	<title>Writing a blogging engine - Data Access</title>
-	<excerpt>
+  <title>Writing a blogging engine - Data Access</title>
+  <publicationDate>2022-02-03T19:45:00.000Z</publicationDate>
+  <excerpt>
 		When thinking about accessing data, what is really important is to define some sort of "contract" to get to the data. 
 		In essence what is needed is some way to get from stored data to populated models. 
 		To make a solution a bit future proof, it is always a good idea to try and make some abstraction of the data source. 
 		This is done to make it possible to change the data source later on.
 	</excerpt>
-	<category>coding</category>
-	<isPublished>true</isPublished>
-	<publicationDate>2022-02-03 20:45:00</publicationDate>
-	<comments>
-	</comments>
+  <ispublished>true</ispublished>
+  <category>coding</category>
+  <comments>
+    <comment>
+      <author>IVo</author>
+      <email />
+      <date>2022-02-13T19:18:49.475Z</date>
+      <content>Test</content>
+      <id>b7ea6d50-ef32-4b8a-a16a-1560d211ee96</id>
+      <replies>
+        <comment>
+          <author>Joske</author>
+          <email />
+          <date>2022-02-13T19:19:22.338Z</date>
+          <content>haha</content>
+          <id>5fc80891-ba18-462a-8470-6ac2b500df81</id>
+          <replies></replies>
+        </comment>
+        <comment>
+          <author>dsfsd</author>
+          <email />
+          <date>2022-02-13T19:19:38.320Z</date>
+          <content>sqdfsqdfsd</content>
+          <id>9c9ef5f5-4c91-4bb8-a4d9-dae84b0199a5</id>
+          <replies></replies>
+        </comment>
+      </replies>
+    </comment>
+  </comments>
 </post>

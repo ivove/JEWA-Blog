@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<post>
+	<postId>ef062105-c66a-4ae3-ad6b-f8cf3d229015</postId>
+	<title>Writing a blogging engine - The basics</title>
+	<excerpt>
+		The real base of any blog are the posts, without those it would not really be a blog. 
+		To organize the blog categories are often used, so any post should belong to a category or multiple categories.
+		Some blogs use tags to further organize the blog, or make searching the blog for a post easier. 
+		Apart from the posts, visitors should be able to leave a comment on a post. This means a post could have comments attached to it. 
+		Some blogs allow for replies to these comments, this is done to aid the discussion and to group comments belonging together.
+	</excerpt>
+	<category>coding</category>
+	<isPublished>true</isPublished>
+	<publicationDate>2022-02-02 20:30:00</publicationDate>
+	<comments>
+	</comments>
+</post>

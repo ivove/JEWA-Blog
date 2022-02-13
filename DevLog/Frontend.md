@@ -64,3 +64,7 @@ Adjusting for this means a change in the IBlogService and in the FileBlogService
 ```
 int GetPostCount(string category ="",bool published  = true);
 ```
+
+### Persisting comments
+
+When building the FileBlogService, only the read operations where built. Now this presented an issue when implementing the comment feature... Is was not possible to persist the comments. This meant the SavePost method needed to be implemented. A very straightforward approach was taken, just write the file to disc, overwriting any previous files.

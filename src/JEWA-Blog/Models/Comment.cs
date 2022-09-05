@@ -8,7 +8,7 @@ namespace JEWA_Blog.Models
         public string CommentId { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
-        public DateTime PublicationTime { get; set; } = DateTime.UtcNow;
+        public DateTime PublicationTime { get; set; } = DateTime.Now;
 
         public string Author { get; set; } = string.Empty;
 

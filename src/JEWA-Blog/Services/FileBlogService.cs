@@ -89,6 +89,7 @@ namespace JEWA_Blog.Services
 
             var doc = new XDocument(
                             new XElement("post",
+                                new XElement("postId",post.PostId),
                                 new XElement("title", post.Title),
                                 new XElement("publicationDate", FormatDateTime(post.PublicationDate)),
                                 new XElement("excerpt", post.Excerpt),
@@ -103,7 +104,7 @@ namespace JEWA_Blog.Services
                     new XElement("comment",
                         new XElement("author", comment.Author),
                         new XElement("email", comment.Email),
-                        new XElement("date", FormatDateTime(comment.PublicationTime)),
+                        new XElement("publicationDate", FormatDateTime(comment.PublicationTime)),
                         new XElement("content", comment.Content),
                         new XElement("id", comment.CommentId),
                         new XElement("replies", string.Empty)
@@ -115,7 +116,7 @@ namespace JEWA_Blog.Services
                         new XElement("comment",
                         new XElement("author", reply.Author),
                         new XElement("email", reply.Email),
-                        new XElement("date", FormatDateTime(reply.PublicationTime)),
+                        new XElement("publicationDate", FormatDateTime(reply.PublicationTime)),
                         new XElement("content", reply.Content),
                         new XElement("id", reply.CommentId),
                         new XElement("replies", string.Empty)
@@ -169,8 +170,7 @@ namespace JEWA_Blog.Services
                     Title = ReadXmlValue(doc, "title"),
                     Excerpt = ReadXmlValue(doc, "excerpt"),
                     Category = ReadXmlValue(doc, "category"),
-                    PublicationDate = DateTime.Parse(ReadXmlValue(doc, "publicationDate"), CultureInfo.InvariantCulture,
-                        DateTimeStyles.AdjustToUniversal),
+                    PublicationDate = DateTime.Parse(ReadXmlValue(doc, "publicationDate")),
                     IsPublished = bool.Parse(ReadXmlValue(doc, "isPublished", "true")),
                 };
                 var markdownFile = Path.Combine(_markdownFolder, post.PostId+".md");
@@ -202,12 +202,11 @@ namespace JEWA_Blog.Services
             {
                 var comment = new Comment
                 {
-                    CommentId = ReadXmlValue(node, "commentId"),
+                    CommentId = ReadXmlValue(node, "id"),
                     Author = ReadXmlValue(node, "author"),
                     Email = ReadXmlValue(node, "email"),
                     Content = ReadXmlValue(node, "content"),
-                    PublicationTime = DateTime.Parse(ReadXmlValue(node, "publicationDate", "2000-01-01 00:00:00"),
-                        CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal),
+                    PublicationTime = DateTime.Parse(ReadXmlValue(node, "publicationDate")),
                 };
                 LoadReplies(comment,node);
                 post.Comments.Add(comment);
@@ -232,8 +231,7 @@ namespace JEWA_Blog.Services
                     Email = ReadXmlValue(node, "email"),
                     Content = ReadXmlValue(node, "content"),
                     ReplyTo = ReadXmlValue(node, "replyTo"),
-                    PublicationTime = DateTime.Parse(ReadXmlValue(node, "publicationDate", "2000-01-01 00:00:00"),
-                        CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal),
+                    PublicationTime = DateTime.Parse(ReadXmlValue(node, "publicationDate")),
                 };
                 LoadReplies(reply, node);
                 comment.Replies.Add(reply);

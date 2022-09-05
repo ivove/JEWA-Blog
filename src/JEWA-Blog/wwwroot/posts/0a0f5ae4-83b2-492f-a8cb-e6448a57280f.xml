@@ -1,15 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <post>
+  <postId>0a0f5ae4-83b2-492f-a8cb-e6448a57280f</postId>
   <title>Writing a blogging engine - Data Access</title>
   <publicationDate>2022-02-03T19:45:00.000Z</publicationDate>
   <excerpt>
-		When thinking about accessing data, what is really important is to define some sort of "contract" to get to the data. 
-		In essence what is needed is some way to get from stored data to populated models. 
-		To make a solution a bit future proof, it is always a good idea to try and make some abstraction of the data source. 
+		When thinking about accessing data, what is really important is to define some sort of "contract" to get to the data.
+		In essence what is needed is some way to get from stored data to populated models.
+		To make a solution a bit future proof, it is always a good idea to try and make some abstraction of the data source.
 		This is done to make it possible to change the data source later on.
 	</excerpt>
   <ispublished>true</ispublished>
   <category>coding</category>
   <comments>
+    <comment>
+      <author>fdgfds</author>
+      <email></email>
+      <publicationDate>2022-09-04T19:28:52.745Z</publicationDate>
+      <content>gqfdgfdgqfd</content>
+      <id>5247ea85-eb04-475a-8659-6ba4bcdec868</id>
+      <replies>
+        <comment>
+          <author>Ivo</author>
+          <email />
+          <publicationDate>2022-09-05T18:46:01.717Z</publicationDate>
+          <content>Testje om te testen</content>
+          <id>17685d39-3664-44c1-b669-c556f626ef4a</id>
+          <replies></replies>
+        </comment>
+        <comment>
+          <author>Ivo</author>
+          <email />
+          <publicationDate>2022-09-05T18:57:32.496Z</publicationDate>
+          <content>lol</content>
+          <id>bb9b5747-8a23-4e77-87a8-52aaa517e1a4</id>
+          <replies></replies>
+        </comment>
+      </replies>
+    </comment>
+    <comment>
+      <author>Ivo</author>
+      <email />
+      <publicationDate>2022-09-05T18:46:17.031Z</publicationDate>
+      <content>nieuwe test</content>
+      <id>2a44217c-a7b6-4fed-a5d7-7cbfdc22bf30</id>
+      <replies></replies>
+    </comment>
   </comments>
 </post>

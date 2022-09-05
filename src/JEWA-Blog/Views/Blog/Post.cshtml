@@ -32,7 +32,7 @@
                             {
                                 <text>(@comment.Email)</text>
                             }
-                            <small class="text-muted">@comment.PublicationTime.ToString("dd/MM/yyyy hh:mm")</small>
+                            <small class="text-muted">@comment.PublicationTime.ToString("dd/MM/yyyy HH:mm")</small>
                         </h5>
                         <p id="@comment.CommentId">@comment.Content</p>
                         @if (comment.Replies != null)
@@ -49,7 +49,7 @@
                                                 {
                                                     <text>(@reply.Email)</text>
                                                 }
-                                                <small class="text-muted">@reply.PublicationTime.ToString("dd/MM/yyyy hh:mm")</small>
+                                                <small class="text-muted">@reply.PublicationTime.ToString("dd/MM/yyyy HH:mm")</small>
                                             </h5>
                                             @reply.Content
                                         </div>
@@ -57,7 +57,7 @@
                                 }
                             }
                         }
-                        <button class="btn btn-dark reply" data-commentId="@comment.CommentId" data-postId="@Model.PostId">Reply</button>
+                        <button class="btn btn-dark reply" id="@comment.CommentId" data-postId="@Model.PostId" data-commentId="@comment.CommentId" data-postId="@Model.PostId">Reply</button>
                     </div>
                 </div>
                 <hr />
@@ -128,7 +128,10 @@
     var modal = new bootstrap.Modal(document.getElementById('commentModal'));
     document.querySelector('.newComment').addEventListener("click", function() {launchModalComment()});
     if (document.querySelector('.reply')){
-        document.querySelector('.reply').addEventListener("click", function() {launchModalReply()});
+        var replyButtons = document.querySelectorAll('.reply');
+        replyButtons.forEach((button) => {
+            button.addEventListener("click", function() {launchModalReply(this.id)});
+        })
         document.querySelector('.newCommentBottom').addEventListener("click", function() {launchModalComment()});
     }
 
@@ -137,10 +140,10 @@
         document.getElementById("postId").value = document.querySelector('.newComment').dataset.postid;
         launchModal();
     };
-    var launchModalReply= function() {
+    var launchModalReply= function(id) {
         document.getElementById("postId").value = document.querySelector('.reply').dataset.postid;
-        document.getElementById("commentId").value = document.querySelector('.reply').dataset.commentid;
-        document.querySelector('.replyTo').innerHTML = document.getElementById(document.querySelector('.reply').dataset.commentid).innerHTML;
+        document.getElementById("commentId").value = id;
+        document.querySelector('.replyTo').innerHTML = document.getElementById(id).innerHTML;
         launchModal();
     };
 
